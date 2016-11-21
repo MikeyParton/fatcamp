@@ -1,0 +1,27 @@
+<% if @user.errors.any? %>
+	<% flash.now[:danger] = "Error! Couldn't update" %>
+<% else %>
+
+	<% if @user.pending_reconfirmation? %>
+		<% flash.now[:success] = "An email has been sent to #{@user.unconfirmed_email}. Follow the instructions make this your account email." %>
+	<% else %>
+		<% flash.now[:success] = "Update successful" %>
+		
+		// Update edit panel
+		<% @user.reload %>
+		$("#edit-profile-panel").html("<%= j render partial: 'edit_profile', locals: { user: @user } %>");
+
+		// Update user panel
+		$('#user-panel').html("<%= j render partial: 'user_panel', locals: { user: @user } %>");
+		render_chart();
+	<% end %>
+
+<% end %>
+
+// Render flash message
+$("#flashes").html('<%= j render "shared/flashes" %>');
+flash_animate();
+
+// Initialize rendered forms
+image_previewer();
+ajax_form_submitter();

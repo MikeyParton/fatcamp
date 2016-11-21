@@ -1,0 +1,84 @@
+<div class="row">
+
+	<div class="col-md-4">
+		<div id="user-search" class="panel panel-default">
+	    <div class="panel-heading">
+	    	<span class="panel-title">Search for a Fatty:</span>
+	    </div>
+	    <ul class="list-group">
+	    	<%= form_tag users_path, method: 'get', class: "search-form" do %>
+				<li class="list-group-item">
+					<%= label_tag :name, "Username or Email" %>
+	  			<%= text_field_tag :name, params[:name], placeholder: "Enter a search query", class: "form-control" %>
+	  		</li>
+				<li class="list-group-item range-fields">
+					<div class="flex-row flex-center-v">
+	  				<%= label_tag :min, "Min:" %>
+	  				<%= number_field_tag :min, params[:min], placeholder: "min", class: "form-control" %>
+	  				&nbsp;lbs
+	  			</div>
+	  			<br>
+	  			<div class="flex-row flex-center-v">
+	  				<%= label_tag :max, "Max:" %>
+	  				<%= number_field_tag :max, params[:max], placeholder: "Max", class: "form-control" %>
+	  				&nbsp;lbs
+	  			</div>
+	  		 </li>
+	  		 <li class="list-group-item">
+	  		 	<%= submit_tag :search, class: "btn btn-primary btn-block" do %>
+						<span class="glyphicon glyphicon-search"></span> Search
+					<% end %>
+	  		 </li>			
+				<% end %>
+			</ul>
+			</div><!-- /user-search .panel -->
+		</div><!-- /column -->	
+
+		<div class="col-md-8">	
+		<div id="search-results" class="panel panel-default">
+			<ul class="list-group">
+
+			<% if @users.any? %>
+
+				<% @users.each do |friend| %>
+		    	<li class="list-group-item">
+		    		<div class="flex-row">
+			    		<%= image_tag friend.profile_pic_url, class: "profile-thumb-sm panel-left" %>
+			    		<div class="stretchy">
+			    				<div class="flex-row flex-center-v">
+										<h5><%= friend.name %></h5>
+										<%= link_to user_path(friend.id) do %>
+											(See Wall)
+										<% end %>
+									</div>
+									<span class="glyphicon glyphicon-envelope"></span><%= " #{friend.email}" %>
+									<br><span class="glyphicon glyphicon-scale"></span><%= " #{format_weight(friend.weight)}" %>
+							</div>
+						</div>
+		    	</li>
+	    	<% end %>
+
+			<% else %> 
+
+				<li class="list-group-item">
+	    		No fatties found
+	    		<br>
+	    		<% if !params[:name].blank? %>
+	    			 - with name or email including <u><%= params[:name] %></u>
+	    		<% end %>
+	    		<br>
+	    		<% if !params[:min].blank? %>
+	    			 - that weigh over <u><%= format_weight(params[:min]) %></u>
+	    		<% end %>
+	    		<br>
+	    		<% if !params[:max].blank? %>
+	    			 - that weigh under <u><%= format_weight(params[:max]) %></u>
+	    		<% end %>
+	    	</li>
+
+			<% end %>
+
+			</ul>
+		</div><!-- /search-results panel -->
+	</div><!-- /column -->
+	</div>

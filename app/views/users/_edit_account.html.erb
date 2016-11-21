@@ -1,0 +1,38 @@
+<li class="list-group-item">
+	<a name="user_email"></a>
+	<%= form_for @user do |f| %>
+			<%= f.label :email do %>
+			 <span class="glyphicon glyphicon-envelope"></span> Email
+			<% end %>
+			<div class="flex-row">
+				<div class="stretchy">
+				<%= f.email_field :email, value: @user.email, required: true, class: "form-control js-show-btns" %>
+				<%= render partial: '/shared/field_error', locals: { resource: @user, field: :email } %>
+				</div>
+				<%= render partial: 'form_action_buttons', locals: { f: f, source: "user_email" } %>
+			</div>
+		<br>
+	<% end %>
+</li>
+
+<li class="list-group-item">
+<a name="user_password"></a>
+<%= form_for @user do |f| %>
+		<div class="flex-row">
+			<div class="stretchy">
+				<%= f.label :password do %> 
+					<span class="glyphicon glyphicon-lock"></span> New Password
+				<% end %>	
+				<%= f.password_field :password, class: "js-show-btns form-control" %>
+				<%= render partial: '/shared/field_error', locals: { resource: @user, field: :password } %>
+				<br>
+				<%= f.label :password_confirmation do %>
+					<span class="glyphicon glyphicon-lock"></span> <span>New Password Confirmation</span>
+				<% end %>
+				<%= f.password_field :password_confirmation, class: "js-show-btns form-control" %>
+				<%= render partial: '/shared/field_error', locals: { resource: @user, field: :password_confirmation } %>
+			</div>
+			<%= render partial: 'form_action_buttons', locals: { f: f, source: "user_password" } %>
+	</div>
+<% end %>
+</li>

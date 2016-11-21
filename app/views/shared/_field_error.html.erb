@@ -1,0 +1,3 @@
+<% if resource.errors.full_messages_for(field).any? %>
+	<div class="error"><%= resource.errors.full_messages_for(field).first %></div>
+<% end %>

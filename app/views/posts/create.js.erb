@@ -1,0 +1,29 @@
+<% if @post.errors.any? %>
+
+	<% flash.now[:alert] = "Error" %>
+	$("#new-post-panel").html("<%= j render partial: 'posts/post_form', locals: { post: @post } %>");
+
+<% else %>
+
+	<% flash.now[:success] = "Post created" %>
+	// add new post to feed
+	var new_post = $("<%= j render partial: 'post', locals: { post: @post } %>").hide()
+	$("#feed").prepend(new_post);
+	new_post.slideDown();
+
+	//update user panel with weight data
+	<% if !@post.weight.blank? %>
+		$("#user-panel").html("<%= j render partial: 'users/user_panel', locals: { user: @user } %>");
+		render_chart();
+	<% end %>
+
+	//reset form
+	$('#new_post')[0].reset();
+	$('#new_post').find('.loading').hide();
+	$('#new_post .image-preview').slideUp();
+
+<% end %>
+
+// Render flash message
+$("#flashes").html('<%= j render "shared/flashes" %>');
+flash_animate();

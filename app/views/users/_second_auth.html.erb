@@ -1,0 +1,14 @@
+<li class="list-group-item">
+	<span class="glyphicon glyphicon-exclamation-sign"></span>
+	Your account includes sensitive information. Please enter your password to edit.</p>
+	<%= form_for current_user, url: profile_edit_account_path, remote: true do |f| %>
+
+	<div class="input-group">
+  	<%= f.password_field :password, class: "form-control", placeholder: "Password" %>
+  	<div class="input-group-btn">
+			<%= f.submit "Edit Account", class: "btn btn-block btn-primary" %>
+  	</div>
+  </div>
+
+	<% end %>
+</li>

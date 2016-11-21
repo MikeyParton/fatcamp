@@ -1,0 +1,43 @@
+<div class="panel panel-default">
+
+	<div class="panel-heading">
+	 	<p class="panel-title">
+	 		<span class="glyphicon glyphicon-piggy-bank"></span>
+	 		&nbsp;Make a Fat Post
+	 	</p>
+	</div>
+	<%= form_for @post, html: { multipart: true }, remote: true do |f| %>
+    <div class="panel-body flex-row relative">
+    	<%= render '/shared/loading' %>
+
+    	<%= image_tag current_user.profile_pic, class: "profile-thumb-sm panel-left" %>
+    	
+			<div class="stretchy">
+				<p><strong><%= current_user.name %></strong></p>
+				
+					<%= f.text_area :text, class: "form-control", placeholder: "What have you got to say?" %>
+					<%= render partial: 'shared/field_error', locals: { resource: @post, field: :text } %>
+				
+				<br>
+				<%= f.label :image do %>
+					<span class="glyphicon glyphicon-picture"></span>
+					<span>Add Image</span>
+				<% end %>
+				<%= f.file_field :image, resource:"post", field:"image", class: "js-image-preview" %>				
+				<br>
+				<div id="post_image_preview" class="image-preview">
+				</div>
+    	</div>
+
+			<div class="scales">
+    		<div class="field">
+				<%= f.number_field :weight, class: "form-control" ,min: 0, max: 1000, step: 0.1, placeholder: "Weight" %>
+				</div>
+    	</div>
+		</div>
+		
+		<div class="panel-footer text-right">
+    	<%= button_tag "Post", type: "button", class: "js-submit btn btn-primary" %>
+    </div>
+  <% end %>
+</div>

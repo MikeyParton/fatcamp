@@ -1,0 +1,16 @@
+<%= form_for @comment, html: { id: "comment-for-#{commentable_type.downcase}-#{commentable_id}" }, remote: true do |f| %>
+	<%= f.hidden_field :commentable_type, value: commentable_type  %>
+	<%= f.hidden_field :commentable_id, value: commentable_id %>
+	<div class="flex-row">
+		<%= image_tag current_user.profile_pic, class: "profile-thumb-xs panel-left" %>
+		<div class="stretchy">
+		<div class="input-group">
+			<%= f.text_field :text, class: "form-control", placeholder: "Leave a comment", required: true %>
+			<span class="input-group-btn">
+				<%= f.submit "Post", class: "btn btn-primary" %>
+			</span>
+		</div>
+		<%= render partial: "/shared/field_error", locals: { resource: @comment, field: :text } %>
+		</div>
+	</div>
+<% end %>

@@ -1,0 +1,68 @@
+<div class="panel panel-default">
+
+	<div class="panel-heading">
+		<p class="panel-title">
+			Edit Profile
+		</p>
+	</div>
+
+	<ul class="list-group">
+	
+		<li id="user-name-container" class="list-group-item">
+			<%= form_for user, remote: true do |f| %>
+			<div class="field">
+				<span class="glyphicon glyphicon-user"></span>
+				<%= f.label :name, "Name" %>
+				<div class="flex-row">
+					<div class="stretchy">
+						<%= f.text_field :name, value: user.name, class: "form-control js-show-btns", required: true %>
+							<%= render partial: '/shared/field_error', locals: { resource: user, field: :name } %>
+					</div>
+					<%= render partial: 'form_action_buttons', locals: { f: f, source: "user_name" } %>
+				</div>
+			</div>
+			<br>
+			<% end %>
+		</li>
+
+		<li class="list-group-item">
+			<%= form_for user, html: { multipart: true, class: "relative" }, remote: true do |f| %>
+			<%= render '/shared/loading' %>
+			<span class="glyphicon glyphicon-picture"></span>
+			<%= f.label :profile_pic, "Change Profile Picture" %>
+			<%= f.file_field :profile_pic, resource:"user", field:"profile_pic", class: "js-image-preview js-show-btns-file" %>
+			<br>
+			<div id="user_profile_pic_preview" class="image-preview"></div>
+			<%= render partial: 'image_action_buttons', locals: { f: f, source: "user_cover_pic" } %>
+			<% end %>
+		</li>
+
+		<li class="list-group-item">
+			<%= form_for user, html: { multipart: true, class: "relative" }, remote: true do |f| %>
+			<%= render '/shared/loading' %>
+				<span class="glyphicon glyphicon-picture"></span>
+				<%= f.label :cover_pic, "Change Cover Picture" %>
+				<%= f.file_field :cover_pic, resource:"user", field:"cover_pic", class: "js-image-preview js-show-btns-file" %>
+				<br>
+				<div id="user_cover_pic_preview" class="image-preview relative"></div>
+				<%= render partial: 'image_action_buttons', locals: { f: f, source: "user_cover_pic" } %>
+			<% end %>
+		</li>
+
+		<li class="list-group-item">
+			<%= form_for user, remote: true do |f| %>
+			<span class="glyphicon glyphicon-book"></span>
+			<%= f.label :profile_text, "About Me" %>
+			<div class="flex-row">
+				<div class="stretchy">
+				<%= f.text_area :profile_text, value: user.profile_text, class: "form-control js-show-btns", required: true %>
+				<%= render partial: '/shared/field_error', locals: { resource: user, field: :profile_text } %>
+				</div>
+				<%= render partial: 'form_action_buttons', locals: { f: f, source: "user_profile_text" } %>
+			</div>
+			<% end %>
+		</li>
+
+	</ul>
+
+</div> <!-- panel -->

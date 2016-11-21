@@ -1,0 +1,58 @@
+<div id="friend-list" class="panel panel-default">
+    <div class="panel-heading">
+    	<p class="panel-title">
+				Friends:
+			</p>
+    </div>
+    <ul class="list-group">
+
+
+			<% @user.friends.each do |friend| %>
+
+    	<li class="list-group-item">
+    		<div class="flex-row">
+	    		<%= image_tag friend.profile_pic, class: "profile-thumb-sm panel-left" %>
+	    		<div class="stretchy">
+							<%= friend.name %>
+							<%= link_to user_path(friend.id) do %>
+								See Wall
+							<% end %>
+					</div>
+				</div>
+    	</li>
+    	<% end %>
+    </ul>
+</div>
+
+
+<% if @user == current_user %>
+	<div id="friend-suggestions" class="panel panel-default">
+	    <div class="panel-heading">
+	    	<p class="panel-title">
+					People you may know:
+				</p>
+	    </div>
+	    <ul class="list-group">
+
+				<% @friend_suggestions.each do |other_user| %>
+				<% if other_user.id != @user.id %>
+	    	<li class="list-group-item">
+	    		<div class="flex-row">
+		    		<%= image_tag other_user.profile_pic, class: "profile-thumb-sm panel-left" %>
+		    		<div class="stretchy">
+		    			<%= form_for @friendship do |f| %>
+		    				<%= f.hidden_field :sender_id, value: @user.id %>
+		    				<%= f.hidden_field :receiver_id, value: other_user.id %>
+								<%= other_user.name %>
+								<%= button_tag(type: 'submit', class: "btn btn-success btn-block") do %>
+									Add Friend
+								<% end %>
+							<% end %>
+						</div>
+					</div>
+	    	</li>
+	    	<% end %>
+	    	<% end %>
+	    </ul>
+	</div>
+<% end %>

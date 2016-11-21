@@ -1,0 +1,14 @@
+// Render flash message
+$("#flashes").html('<%= j render "shared/flashes" %>');
+flash_animate();
+
+// hide post
+post = $("#post-" + <%= @post.id %>);
+post.slideUp();
+post.remove();
+
+// refresh user panel if weight changed
+<% if !@post.weight.blank? %>
+	$("#user-panel").html("<%= j render partial: 'users/user_panel', locals: { user: @user } %>");
+	render_chart();
+<% end %>

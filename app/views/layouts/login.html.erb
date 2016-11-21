@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Fatty</title>
+    <%= csrf_meta_tags %>
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <link href="https://fonts.googleapis.com/css?family=Fredoka+One" rel="stylesheet">
+  </head>
+
+  <%= render "shared/flashes" %>
+
+  <body>
+	  	<div class="login-container">
+        <div class="logo big-logo">
+  				<h1>Fat Camp</h1>
+          <%= image_tag "scooter_guy.png" %>
+        </div>
+        <br>
+	  		<%= yield %>
+	  	</div>
+  </body>
+</html>

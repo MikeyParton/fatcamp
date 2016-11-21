@@ -1,0 +1,29 @@
+<div class="row">
+	<div id="user-panel" class="col-md-3">
+		<%= render partial: "user_panel", locals: { user: @user } %>
+	</div>
+	
+	<div class="col-md-6">
+		<% if @user == current_user %>
+			<div id="new-post-panel"> 
+				<%= render "posts/post_form" %>
+			</div>
+		<% end %>
+	
+		<div id="feed">
+			<% if @posts.any? %>
+				<% @posts.each do |post| %>
+						<%= render partial: "posts/post", locals: { post: post } %>
+		    <% end %>
+	    <% else %>
+	    	<%= render "posts/no_posts" %>
+	    <% end %>
+    </div>
+		
+	</div>
+
+	<div class="col-md-3">
+		<%= render "friends_list" %>
+	</div>
+	
+</div>

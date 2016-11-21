@@ -1,0 +1,29 @@
+.navbar{
+	background-color: #3097d1;
+	border-radius: 0px;
+	border: 0;
+}
+
+.undecorate, .undecorate:hover {
+	text-decoration: none;
+
+}
+
+.navbar-brand, ul.nav li a, ul.nav li a:visited {
+	color: rgba(255, 255, 255, 0.8) !important;
+	background-color: #3097d1;
+}
+
+.navbar-brand:hover, ul.nav li a:hover, ul.nav li a:active {
+  color: white !important;
+	background-color: #3097d1;
+}
+
+ul.nav li.active a {
+  color: white !important;
+	background-color: #3097d1;
+}
+
+.navbar-toggle .icon-bar {
+	color: white;
+}

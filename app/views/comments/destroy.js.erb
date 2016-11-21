@@ -1,0 +1,9 @@
+// Render flash message
+$("#flashes").html('<%= j render "shared/flashes" %>');
+flash_animate();
+
+// delete post
+comment = $("#comment-" + <%= @comment.id %>);
+comment.slideUp(400, function(){
+	comment.remove();
+});

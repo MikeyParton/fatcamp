@@ -1,0 +1,24 @@
+<div class="panel panel-default">
+	<div class="panel-cover">
+	<%= image_tag @user.cover_pic, class: "cover-image" %>
+	<%= image_tag @user.profile_pic, class: "profile-thumb-lg" %>
+	</div>
+	<div class="panel-body text-center">
+
+    <h3><%= @user.name %></h3>
+    <%= content_tag :canvas, "", id: "myChart", data: { progress: @user.progress.to_json }, height: 300, width: 400 %>
+    <p><%= format_weight(@user.weight) %></p>
+    <p class="profile-text"><%= @user.profile_text %></p>
+
+    <% if @user.id != current_user.id %>
+      <br>
+      <%= form_for @friendship do |f| %>
+        <%= f.hidden_field :receiver_id, value: @user.id %>
+        <%= button_tag(type: 'submit', class: "btn btn-success btn-block") do %>
+          Add Friend
+        <% end %>
+      <% end %>
+    <% end %>
+
+  </div>
+</div>

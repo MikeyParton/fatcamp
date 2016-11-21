@@ -1,0 +1,36 @@
+<div class="row">
+
+	<div class="col-md-3">
+		<div id="user-panel">
+			<%= render 'user_panel' %>
+		</div>
+	</div>
+
+	<div class="col-md-9">
+
+		<div id="edit-profile-panel">
+			<%= render partial: 'edit_profile', locals: { user: @user } %>
+		</div>
+
+		<div id="update-account-panel">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<p class="panel-title">
+						<span class="glyphicon glyphicon-cog"></span>
+						Edit Account
+					</p>
+				</div>
+				<ul class="list-group">
+				<% if session[:second_auth] == true %>
+					<%= render "/users/edit_account" %> 
+				<% else %>
+					<%= render "/users/second_auth" %> 
+				<% end %>
+				</ul>
+			</div>
+		</div>
+
+	</div>
+	
+
+</div>

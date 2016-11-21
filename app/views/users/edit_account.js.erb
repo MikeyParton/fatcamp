@@ -1,0 +1,10 @@
+<% if session[:second_auth] == true %>
+	<% flash.now[:success] = "Access granted" %>
+	$("#update-account-panel").find(".list-group").html("<%= j render 'edit_account' %>");
+<% else %>
+	<% flash.now[:danger] = "Incorrect password" %>
+<% end %>
+
+// Render flash message
+$("#flashes").html('<%= j render "shared/flashes" %>');
+flash_animate();
