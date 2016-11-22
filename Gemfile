@@ -57,7 +57,7 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'devise'
 
 gem 'carrierwave', '>= 1.0.0.rc', '< 2.0'
-gem 'rmagick'
+gem "mini_magick"
 gem 'fog-google'
 gem 'google-api-client', '~> 0.8.6'
 gem 'figaro'
