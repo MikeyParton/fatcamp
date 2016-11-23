@@ -24,3 +24,6 @@
 
 #ignore secrets
 /config/secrets.yml
+
+#ignore database config
+/config/database.yml
