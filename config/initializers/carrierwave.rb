@@ -4,9 +4,9 @@ CarrierWave.configure do |config|
 
 	    :provider                         => "Google",
 	    :google_storage_access_key_id     => Rails.application.secrets.google_storage_access_key_id,
-	    :google_storage_secret_access_key => "51UhrUcJDjs2hAbH0RAB4s4H3BIMGXZpOezXsWST"
+	    :google_storage_secret_access_key => Rails.application.secrets.google_storage_secret_access_key
 
 	    }
 
-	    config.fog_directory = "fatcamp"
+	    config.fog_directory = Rails.application.secrets.google_storage_bucket_name
 end
