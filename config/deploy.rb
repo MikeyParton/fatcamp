@@ -1,8 +1,7 @@
 # Change these
-server "psimple" ,roles: %w{app db web}
 server '104.236.148.132', port: 22, roles: [:web, :app, :db], primary: true
 
-set :migration_role, :app                        
+set :migration_role, :app                     
 set :repo_url,        'git@github.com:MikeyParton/fatcamp.git'
 set :application,     'fatcamp'
 set :user,            'deploy'
