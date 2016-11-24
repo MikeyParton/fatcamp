@@ -1,0 +1,11 @@
+<% if @friendship.errors.any? %>
+	<% flash.now[:danger] = "Couldn't remove friend" %>
+<% else %>
+	<% flash.now[:success] = "You are no longer friends with #{friend_from_friendship(@friendship)}" %>
+	$("#friends-list").html("<%= j render partial: 'users/friends_list' %>");
+	$("#friend-suggester").html("<%= j render partial: 'users/friend_suggester' %>");
+<% end %>
+
+// Render flash message
+$("#flashes").html('<%= j render "shared/flashes" %>');
+flash_animate();

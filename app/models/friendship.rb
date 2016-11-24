@@ -10,4 +10,8 @@ class Friendship < ApplicationRecord
 		self.status ||= :pending
 	end
 
+	def self.between(*user_ids)
+		Friendship.where(sender_id: user_ids, receiver_id: user_ids)
+	end
+
 end

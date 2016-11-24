@@ -70,7 +70,7 @@
 }
 
 .scales {
-	padding-top: 20px;
+	padding: 25px 40px 0 40px;
 	margin: 0 0 0 0px;
 	position: absolute;
 	bottom: 0;
@@ -83,13 +83,13 @@
 
 	input {
 		border-radius: 34px;
-		padding: 6px 12px;
-		margin: 0 auto;
-		text-align: center;
-		width: 120px;
-		height: 34px;
-		border: 0;
+		text-align: right;
 		background-color: white;
+	}
+
+	.input-group-addon{
+		border-top-right-radius: 34px;
+		border-bottom-right-radius: 34px;
 	}
 }
 
@@ -124,4 +124,8 @@
 .image-action-buttons {
 	display: none;
 	text-align: right;
+}
+
+.user-item {
+	text-align: center
 }

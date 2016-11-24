@@ -9,7 +9,6 @@
 	<%= form_for @post, html: { multipart: true }, remote: true do |f| %>
     <div class="panel-body flex-row relative">
     	<%= render '/shared/loading' %>
-
     	<%= image_tag current_user.profile_pic, class: "profile-thumb-sm panel-left" %>
     	
 			<div class="stretchy">
@@ -23,15 +22,23 @@
 					<span class="glyphicon glyphicon-picture"></span>
 					<span>Add Image</span>
 				<% end %>
-				<%= f.file_field :image, resource:"post", field:"image", class: "js-image-preview" %>				
+				<%= f.file_field :image, resource:"post", field:"image", class: "js-image-preview" %>
+				<%= render partial: 'shared/field_error', locals: { resource: @post, field: :image } %>			
 				<br>
 				<div id="post_image_preview" class="image-preview">
 				</div>
+				<br>
+				<%= f.label :weight do %>
+					<span class="glyphicon glyphicon-scale"></span>
+					<span>Weight</span>
+				<% end %>
+				<%= render partial: 'shared/field_error', locals: { resource: @post, field: :weight } %>
     	</div>
-
+			
 			<div class="scales">
-    		<div class="field">
-				<%= f.number_field :weight, class: "form-control" ,min: 0, max: 1000, step: 0.1, placeholder: "Weight" %>
+				<div class="input-group">	
+					<%= f.number_field :weight, class: "form-control" ,min: 0, max: 1000, step: 1, placeholder: "Weight" %>
+					<span class="input-group-addon">lbs</span>
 				</div>
     	</div>
 		</div>

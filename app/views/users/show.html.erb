@@ -16,14 +16,20 @@
 						<%= render partial: "posts/post", locals: { post: post } %>
 		    <% end %>
 	    <% else %>
-	    	<%= render "posts/no_posts" %>
+	    	<div id="feed-placeholder">
+	    		<%= render "posts/no_posts" %>
+	    	</div>
 	    <% end %>
     </div>
-		
 	</div>
 
 	<div class="col-md-3">
-		<%= render "friends_list" %>
+		<div id="friend-suggester">
+			<%= render partial: "friend_suggester"  %>
+		</div>
+		<div id="friends-list">
+			<%= render partial: "friends_list" %>
+		</div>
 	</div>
 	
 </div>

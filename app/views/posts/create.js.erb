@@ -6,6 +6,9 @@
 <% else %>
 
 	<% flash.now[:success] = "Post created" %>
+	// remove placeholder if users first post
+	$("#feed-placeholder").remove();
+
 	// add new post to feed
 	var new_post = $("<%= j render partial: 'post', locals: { post: @post } %>").hide()
 	$("#feed").prepend(new_post);

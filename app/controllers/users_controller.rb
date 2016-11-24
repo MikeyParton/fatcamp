@@ -12,7 +12,7 @@ class UsersController < ApplicationController
 		@user = current_user
 		@posts = @user.feed.order(id: :desc)
 		@friend_suggestions = @user.not_friends.limit(5)
-		@friendship = Friendship.new
+		@new_friendship = Friendship.new()
 		@post = Post.new
 		@comment = Comment.new
 		render 'show'
