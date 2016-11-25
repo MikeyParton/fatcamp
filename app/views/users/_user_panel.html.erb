@@ -12,10 +12,22 @@
 
     <% if @user.id != current_user.id %>
       <br>
-      <%= form_for @friendship do |f| %>
-        <%= f.hidden_field :receiver_id, value: @user.id %>
-        <%= button_tag(type: 'submit', class: "btn btn-success btn-block") do %>
-          Add Friend
+      <% if @user.friends.include?(current_user) %>
+        <%= form_for @old_friendship, remote: true, method: :delete, data: { confirm: "Are you sure you want to stop being friends with #{@user.name}?" } do |f| %>
+          <%= f.hidden_field :page, value: @user.id %>
+          <%= button_tag(type: 'submit', class: "btn btn-danger btn-block") do %>
+            <span class="glyphicon glyphicon-remove"></span>&nbsp;Remove Friend
+          <% end %>
+        <% end %>
+      <% else %>
+
+        <%= form_for @new_friendship, remote: true do |f| %>
+          <%= f.hidden_field :sender_id, value: current_user.id %>
+          <%= f.hidden_field :receiver_id, value: @user.id %>
+          <%= f.hidden_field :page, value: @user.id %>
+          <%= button_tag(type: 'submit', class: "btn btn-success btn-block") do %>
+            <span class="glyphicon glyphicon-plus"></span>&nbsp;Add Friend
+          <% end %>
         <% end %>
       <% end %>
     <% end %>

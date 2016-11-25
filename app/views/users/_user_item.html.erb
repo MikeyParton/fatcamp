@@ -1,4 +1,4 @@
-<div class="flex-row">
+<div class="flex-row flex-center-v">
 	<%= image_tag other_user.profile_pic, class: "profile-thumb-sm panel-left" %>
 	<div class="stretchy text-center">
 
@@ -6,20 +6,26 @@
 		<% if @user.friends.include?(other_user) %>
 
 			<%= link_to other_user.name, other_user %>
-			<%= link_to friendship_path(@user.friendship_with(other_user.id).first.id), class: "btn btn-danger btn-block", method: :delete, data: { confirm: "Are you sure you want to stop being friends with #{other_user.name}?" }, remote: true do %> 
-				<span class="glyphicon glyphicon-remove"></span>&nbsp;Remove Friend
-			<% end %>
+			<% if @user.id == current_user.id %>
+
+				<%= form_for Friendship.between(@user.id, other_user.id).first, remote: true, method: :delete, data: { confirm: "Are you sure you want to stop being friends with #{other_user.name}?" } do |f| %>
+	        <%= f.hidden_field :page, value: @user.id %>
+	        <%= button_tag(type: 'submit', class: "btn btn-danger btn-block") do %>
+	          <span class="glyphicon glyphicon-remove"></span>&nbsp;Remove Friend
+	        <% end %>
+	      <% end %>
+	    <% end %>
 		
 		<% else %>
-
 			<%= form_for @new_friendship, remote: true do |f| %>
 				<%= f.hidden_field :sender_id, value: @user.id %>
 				<%= f.hidden_field :receiver_id, value: other_user.id %>
+				<%= f.hidden_field :page, value: @user.id %>
 				<%= link_to other_user.name, other_user %>
 				<%= button_tag(type: 'submit', class: "btn btn-success btn-block") do %>
 					<span class="glyphicon glyphicon-plus"></span>&nbsp;Add Friend
-				<% end %>
 			<% end %>
+		<% end %>
 
 		<% end %>
 

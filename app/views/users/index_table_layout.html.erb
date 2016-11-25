@@ -1,0 +1,24 @@
+		<!-- Table layout
+			<table class="table table-bordered">
+ 				<thead>
+ 					<th>Name</th>
+ 					<th>email</th>
+ 					<th>weight</th>
+ 					<th>weight loss</th>
+ 					<th>posts</th>
+ 					<th>status</th>
+ 				</thead>
+ 				<% @users.each do |friend| %>
+ 				<tr>
+ 					<td>
+ 						<%= image_tag friend.profile_pic_url, class: "profile-thumb-sm panel-left" %>
+ 						<%= friend.name %>
+ 					</td>
+ 					<td><%= friend.email %></td>
+ 					<td><%= format_weight(friend.weight) %></td>
+ 					<td><%= format_weight(friend.weight) %></td>
+ 					<td><%= friend.posts.count %></td>
+ 				</tr>
+ 				<% end %>
+			</table>
+			-->

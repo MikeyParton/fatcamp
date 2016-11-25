@@ -20,12 +20,12 @@ class UsersController < ApplicationController
 
 	def show
 		@user = User.find(params[:id])
+		@comment = Comment.new
+		@posts = @user.posts.order("id desc")
+		@new_friendship = Friendship.new
+		@old_friendship = Friendship.between(current_user.id, @user.id).first
 		if @user.id == current_user.id
 			redirect_to root_path
-		else
-			@comment = Comment.new
-			@posts = @user.posts.order("id desc")
-			@friendship = Friendship.new
 		end
 	end
 

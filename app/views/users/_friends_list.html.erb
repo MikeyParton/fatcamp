@@ -1,4 +1,4 @@
-<% if @user.friends.any? %>
+<% if @user.friends.count > 0 %>
 	<div class="panel panel-default">
 	
     <div class="panel-heading">
@@ -9,9 +9,11 @@
 
     <ul class="list-group">
 			<% @user.friends.each do |friend| %>
-			<li id=id="user-<%=friend.id%>" class="list-group-item">
-	    	<%= render partial: '/users/user_item', locals: { other_user: friend } %>
-	    </li>
+				<% if @user.id != friend.id %>
+				<li id=id="user-<%=friend.id%>" class="list-group-item">
+		    	<%= render partial: '/users/user_item', locals: { other_user: friend } %>
+		    </li>
+	    <% end %>
     	<% end %>
     </ul>
 

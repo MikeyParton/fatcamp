@@ -2,8 +2,19 @@
 	<% flash.now[:danger] = "Couldn't add friend" %>
 <% else %>
 	<% flash.now[:success] = "You are now friends with #{@friendship.receiver.name}" %>
+
+	// Update friend suggestions if on home page
+	<% if @user.id == current_user.id %>
+		$("#friend-suggester").html("<%= j render partial: 'users/friend_suggester' %>");
+	<% else %>
+		$("#user-panel").html("<%= j render partial: 'users/user_panel' %>");
+		render_chart();
+	<% end %>
+
+	// Update friends list
 	$("#friends-list").html("<%= j render partial: 'users/friends_list' %>");
-	$("#friend-suggester").html("<%= j render partial: 'users/friend_suggester' %>");
+	
+
 <% end %>
 
 // Render flash message
