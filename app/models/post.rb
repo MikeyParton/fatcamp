@@ -1,7 +1,7 @@
 class Post < ApplicationRecord
 	belongs_to :user
-	has_many :comments, as: :commentable
-	mount_uploader :image, PostImageUploader
+	has_many :comments, as: :commentable, dependent: :destroy
+	mount_uploader :image, PostImageUploader, dependent: :destroy
   after_commit :update_user_index, only: [:create, :destroy, :update]
 
 	validates :text, presence: { message: "can't be blank if image and weight are blank" }, unless: ->(post){ post.weight.present? || post.image.present? }

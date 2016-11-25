@@ -143,13 +143,19 @@ textarea {
 }
 
 
+#flash-container {
+	position: fixed;
+	bottom: 0;
+	right: 0;
+	z-index: 10;
+	padding-right: 10px;
+	text-align: right;
+}
 
 .alert {
-	position: fixed;
-	top: 10px;
-	left: 10px;
-	animation: popDown 0.75s forwards cubic-bezier(1,0,0,1);
-	z-index: 10;
+	display: inline-block;
+	margin: 0 0 10px auto;
+	animation: slideEnter 0.75s forwards cubic-bezier(1,0,0,1);
 }
 
 .alert-alert {
@@ -160,21 +166,18 @@ textarea {
 	@extend .alert-info;
 }
 
-.popUp {
-	position: fixed;
-	top: 10px;
-	left: 10px;
-	animation: popUp 0.75s forwards cubic-bezier(1,0,0,1);
+.slideExit{
+	animation: slideExit 0.75s forwards cubic-bezier(1,0,0,1);
 }
 
-@keyframes popDown {
-	0% { transform:translateY(-65px)}
-	100% { transform:translateY(0px)}
+@keyframes slideEnter {
+	0% { transform:translateX(120%)}
+	100% { transform:translateX(0px)}
 }
 
-@keyframes popUp {
-	0% { transform:translateY(0px)}
-	100% { transform:translateY(-65px)}
+@keyframes slideExit {
+	0% { transform:translateX(0px)}
+	100% { transform:translateX(120%)}
 }
 
 .search-form {

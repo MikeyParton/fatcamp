@@ -1,29 +1,61 @@
+$bgDefault      : #3097d1;
+$bgHighlight    : #3097d1;
+$colDefault     : #ecf0f1;
+$colHighlight   : white;
+.navbar-default {
+  background-color: $bgDefault;
+  border-color: $bgHighlight;
+  .navbar-brand {
+    color: $colDefault;
+    &:hover, &:focus { 
+      color: $colHighlight; }}
+  .navbar-text {
+    color: $colDefault; }
+  .navbar-nav {
+    > li {
+      > a {
+        color: $colDefault;
+        &:hover,  &:focus {
+          color: $colHighlight; }}}
+    > .active {
+      > a, > a:hover, > a:focus {
+        color: $colHighlight;
+        background-color: $bgHighlight; }}
+    > .open {
+      > a, > a:hover, > a:focus {
+        color: $colHighlight;
+        background-color: $bgHighlight; }}}
+  .navbar-toggle {
+    border-color: $bgHighlight;
+    &:hover, &:focus {
+      background-color: $bgHighlight; }
+    .icon-bar {
+      background-color: $colDefault; }}
+  .navbar-collapse,
+  .navbar-form {
+    border-color: $colDefault; }
+  .navbar-link {
+    color: $colDefault;
+    &:hover {
+      color: $colHighlight; }}}
+@media (max-width: 767px) {
+  .navbar-default .navbar-nav .open .dropdown-menu {
+    > li > a {
+      color: $colDefault;
+      &:hover, &:focus {
+        color: $colHighlight; }}
+    > .active {
+      > a, > a:hover, > a:focus, {
+        color: $colHighlight;
+        background-color: $bgHighlight; }}}
+}
+
+.dropdown-toggle.nav-thumb {
+  padding: 10px 15px 10px 15px;
+}
+
+
 .navbar{
-	background-color: #3097d1;
 	border-radius: 0px;
 	border: 0;
-}
-
-.undecorate, .undecorate:hover {
-	text-decoration: none;
-
-}
-
-.navbar-brand, ul.nav li a, ul.nav li a:visited {
-	color: rgba(255, 255, 255, 0.8) !important;
-	background-color: #3097d1;
-}
-
-.navbar-brand:hover, ul.nav li a:hover, ul.nav li a:active {
-  color: white !important;
-	background-color: #3097d1;
-}
-
-ul.nav li.active a {
-  color: white !important;
-	background-color: #3097d1;
-}
-
-.navbar-toggle .icon-bar {
-	color: white;
 }

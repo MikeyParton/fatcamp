@@ -1,0 +1,4 @@
+new_flash = $('<%= j render "shared/flashes" %>').hide();
+$("#flash-container").append(new_flash);
+new_flash.slideDown();
+flash_animate();

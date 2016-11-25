@@ -7,10 +7,7 @@
 	<% end %>
 
 	<% if !post.text.nil? %>
-		<ul class="list-group">
-
-		  <li class="list-group-item">
-		  	<div class="post-container">
+		  	<div class="post-container panel-body">
 		  		<div class="flex-row">
 			  		<%= image_tag post.user.profile_pic, class: "profile-thumb-sm panel-left" %>
 			  		<div class="stretchy">
@@ -49,20 +46,13 @@
 					<p><%= time_ago_in_words(post.created_at) %> ago</p>
 					</div>
 				</div>
-			</li>
 
-			<div class="comments-list">
+			<ul class="list-group comments-list">
 				<% post.comments.each do |comment| %>
 					<%= render partial: "/comments/comment", locals: { comment: comment } %>
-				<% end %>
-			</div>
-
-
-			<li class="list-group-item">
+				<% end %>	
 				<%= render partial: "/comments/comment_form", locals: { commentable_type: "Post", commentable_id: post.id } %>
-			</li>
+			</ul>
 
-
-		</ul>
 	<% end %>
 </div>

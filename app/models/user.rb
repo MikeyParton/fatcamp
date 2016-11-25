@@ -5,6 +5,13 @@ class User < ApplicationRecord
 	include Elasticsearch::Model
 	include Elasticsearch::Model::Callbacks
 
+	has_many :posts, dependent: :destroy
+	has_many :comments, dependent: :destroy
+	has_many :sent_friendships, class_name: "Friendship", foreign_key: "sender_id", dependent: :destroy
+	has_many :sent_friends, through: :sent_friendships, source: :receiver
+	has_many :received_friendships, class_name: "Friendship", foreign_key: "receiver_id", dependent: :destroy
+	has_many :received_friends, through: :received_friendships, source: :sender
+
 	settings index: { number_of_shards: 1 } do
 	  mappings dynamic: 'false' do
 	    indexes :name, type: 'string', analyzer: 'english'
@@ -54,13 +61,6 @@ class User < ApplicationRecord
 	validates :password, length: { minimum: 6}, :unless => Proc.new {|user| !user.new_record? && user.password.nil?}
 	validates_confirmation_of :password
 
-	has_many :posts, dependent: :destroy
-	has_many :comments, dependent: :destroy
-	has_many :sent_friendships, class_name: "Friendship", foreign_key: "sender_id", dependent: :destroy
-	has_many :sent_friends, through: :sent_friendships, source: :receiver
-	has_many :received_friendships, class_name: "Friendship", foreign_key: "receiver_id", dependent: :destroy
-	has_many :received_friends, through: :received_friendships, source: :sender
-
 	mount_uploader :profile_pic, ProfilePicUploader
 	mount_uploader :cover_pic, CoverPicUploader
 
@@ -103,7 +103,7 @@ class User < ApplicationRecord
 		start_time = self.created_at if start_time < self.created_at
 		
 		data = { labels: [], weights: [] }
-		difference_in_days = (end_time - start_time).to_i / 1.day
+		difference_in_days = (end_time - start_time.beginning_of_day).to_i / 1.day
 		progress_posts = self.posts.between(start_time.beginning_of_day, end_time.end_of_day).weigh_ins
 
 		(0..difference_in_days).each do |x|

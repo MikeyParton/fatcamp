@@ -12,7 +12,7 @@ class CommentsController < ApplicationController
 		@comment = Comment.find(params[:id])
 		@comment.destroy
 		respond_to do |format|
-			format.js { flash.now[:success] = "Comment deleted" }
+			format.js
 		end
 	end
 

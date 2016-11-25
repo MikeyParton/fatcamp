@@ -1,17 +1,17 @@
 <% if !comment.text.nil? %>
 	<li id="comment-<%= comment.id %>" class="list-group-item">
-	<% if comment.user.id == current_user.id %>
-		<%= link_to comment_path(comment), data: { confirm: "Are you sure you want to delete this?" }, method: :delete, remote: true, class: "delete-btn" do %>
-			<span class="glyphicon glyphicon-remove"></span>
+		<% if comment.user.id == current_user.id %>
+			<%= link_to comment_path(comment), data: { confirm: "Are you sure you want to delete this?" }, method: :delete, remote: true, class: "delete-btn" do %>
+				<span class="glyphicon glyphicon-remove"></span>
+			<% end %>
 		<% end %>
-	<% end %>
-	<div class="comment-container flex-row">
-		<%= image_tag comment.user.profile_pic, class: "profile-thumb-xs panel-left" %>
-		<div class="stretchy">
-			<strong><%= comment.user.name %></strong>
-			<p><%= comment.text %></p>
-			<p class="text-right text-muted"><%= time_ago_in_words(comment.created_at)%> ago </p>
+		<div class="comment-container flex-row">
+			<%= image_tag comment.user.profile_pic, class: "profile-thumb-xs panel-left" %>
+			<div class="stretchy">
+				<strong><%= comment.user.name %></strong>
+				<p><%= comment.text %></p>
+				<p class="text-right text-muted"><%= time_ago_in_words(comment.created_at)%> ago </p>
+			</div>
 		</div>
-	</div>
 	</li>
 <% end %>

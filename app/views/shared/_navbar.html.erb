@@ -1,8 +1,8 @@
-<nav class="navbar">
+<nav class="navbar navbar-default">
   <div class="container-fluid">
-    <!-- Brand and toggle get grouped for better mobile display -->
+
     <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapsed" aria-expanded="false">
   			<span class="glyphicon glyphicon-menu-hamburger"></span>
       </button>
       <a class="navbar-brand logo small-logo" href="#">
@@ -10,20 +10,33 @@
       </a>
     </div>
 
-    <!-- Collect the nav links, forms, and other content for toggling -->
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+
+    <div class="collapse navbar-collapse" id="navbar-collapsed">
       <ul class="nav navbar-nav">
-        <li class="active">
-          <%= link_to "Home", root_path %>
-        </li>
-        <li>
-          <%= link_to "Profile", profile_path %>
-        </li>
-        <li>
-          <%= link_to "Search", users_path %>
-        </li>
-        <li>
-          <%= link_to('Logout', destroy_user_session_path, :method => :delete) %>
+        <li class="<%= 'active' if current_page?(root_path) %>"><%= link_to "Home", root_path %></li>
+        <li class="<%= 'active' if current_page?(users_path) %>"><%= link_to "Search", users_path %></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle nav-thumb" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+            <%= image_tag current_user.profile_pic, class: "profile-thumb-xs" %>
+            <span><%= current_user.name %></span>
+            <span class="caret"></span>
+          </a>
+          <ul class="dropdown-menu">
+            <li>
+              <%= link_to profile_path do%>
+                <span class="glyphicon glyphicon-cog"></span>
+                &nbsp;<span>My Profile</span>
+              <% end %>
+            </li>
+            <li>
+              <%= link_to destroy_user_session_path, method: :delete do %>
+              <span class="glyphicon glyphicon-off"></span>
+                &nbsp;<span>Logout</span>
+              <% end %>
+            </li>
+          </ul>
         </li>
       </ul>
     </div><!-- /.navbar-collapse -->

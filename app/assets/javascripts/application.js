@@ -57,12 +57,13 @@ function js_cancel_change(event) {
 }
 
 function flash_animate() {
-		setTimeout(
-			function(){
-				flash = $(".alert")
-				if (flash.length > 0) {
-					flash.addClass("popUp")
-				}
-			}, 4000
-		);
-	}
+	setTimeout( function(){
+		flash = $(".flash-group").not(".deleting").first();
+		flash.addClass("deleting");
+		console.log(flash.find('.alert'))
+		flash.find('.alert').addClass("slideExit")
+		$(flash).fadeOut( 400, function(){
+			this.remove();
+		}) 
+	}, 4000);
+}

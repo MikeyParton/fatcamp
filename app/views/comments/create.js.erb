@@ -1,16 +1,15 @@
 <% if @comment.errors.any? %>
 	<% flash.now[:danger] = "Error! Couldn't leave comment" %>
 <% else %>
-	var commentable_item = $("#<%= @comment.commentable_type.downcase %>-<%= @comment.commentable_id %>");
-	var form = commentable_item.find("form")[0];
-	var comments_list = commentable_item.find(".comments-list")
-	var new_comment = $("<%= j render partial: '/comments/comment', locals: { comment: @comment } %>").hide()
+	var commentable_id = "#<%= @comment.commentable_type.downcase %>-<%= @comment.commentable_id %>";
+	var form = $(commentable_id).find("form")[0];
+	var comments_list = $(commentable_id).find(".comments-list");
+	var new_comment = $("<%= j render partial: '/comments/comment', locals: { comment: @comment } %>").hide();
 	
 	form.reset();
-	comments_list.append(new_comment);
+	$(commentable_id + " .comments-list li:last").before($(new_comment));
 	new_comment.slideDown();
+	<% flash.now[:success] = "comment made" %>
 <% end %>
 
-// Render flash message
-$("#flashes").html('<%= j render "shared/flashes" %>');
-flash_animate();
+<%= render '/shared/add_flash' %>

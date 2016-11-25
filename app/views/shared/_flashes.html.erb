@@ -1,5 +1,9 @@
-<% flash.each do |type, message| %>
-  <div class="alert alert-<%= type %>">
-    <%= message %>
-  </div>
+<div class="flash-group">
+<% flash.each do | type, message | %>
+	<div class="flash-box relative">
+		<div class="alert alert-<%= type %>">
+			<%= message %>
+		</div>
+	</div>
 <% end %>
+</div>
